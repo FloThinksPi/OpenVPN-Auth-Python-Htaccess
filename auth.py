@@ -1,42 +1,38 @@
-# coding=utf-8
-from logging import getLogger, FileHandler, Formatter, INFO
-from os import environ
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 
+import logging
+from os import environ
 from bcrypt import checkpw
 
-logFilePath = '/var/log/myvpn/OpenVPN-Auth.log'
+logFilePath = '/var/log/myvpn/auth.log'
 
 Username = environ['username']
 Password = environ['password']
 
-logger = getLogger( 'OpenVPN-Auth' )
-hdlr = FileHandler( logFilePath )
-formatter = Formatter( '%(asctime)s %(levelname)s %(message)s' )
-hdlr.setFormatter( formatter )
-logger.addHandler( hdlr )
-logger.setLevel( INFO )
+logging.basicConfig(format='%(asctime)s %(levelname)s %(message)s',level=logging.INFO)
 
 try:
 
     with open( "user.data" ) as f:
-        data = f.readlines()
+        lines = f.read().splitlines()
 
-    for line in data:
+    for line in lines:
         words = line.split( ":" )
         if words[0][0] == '#':
             continue
-        else:
+        if words[0] != '' and words[1] != '' and words[0][0] != ' ' and words[1][0] != ' ':
             if words[0] == Username:
                 if checkpw( Password.encode(), words[1].encode() ):
-                    logger.info( "User: " + words[0] + " - Sucessfully Authenticated" )
+                    logging.info( "User: " + words[0] + " - Sucessfully Authenticated" )
                     exit( 0 )
                 else:
-                    logger.warning("User: "+words[0]+" - Password Did not Match" )
+                    logging.warning("User: "+words[0]+" - Password Did not Match" )
                     exit( 1 )
 
-    logger.warning( "User: " + Username + " - User not Found" )
+    logging.warning( "User: " + Username + " - User not Found" )
     exit( 1 )
 
 except Exception as e:
-    logger.critical(str(e))
+    logging.critical(str(e))
     exit(1)
