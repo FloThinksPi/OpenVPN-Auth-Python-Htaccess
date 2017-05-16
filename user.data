@@ -1,0 +1,3 @@
+# Generate Passwords on http://aspirine.org/htpasswd_en.html , with bcrypt(12)!
+# Example User: myuser:mypassword
+myuser:$2y$12$WemR1o91lyy2FcAZE.pLHeTBdqQ.TPX78hqUHwl2VZ6qFSxrBP1SO
