@@ -34,5 +34,9 @@ try:
                     logger.warning("User: "+words[0]+" - Password Did not Match" )
                     exit( 1 )
 
+    logger.warning( "User: " + Username + " - User not Found" )
+    exit( 1 )
+
 except Exception as e:
     logger.critical(str(e))
+    exit(1)
