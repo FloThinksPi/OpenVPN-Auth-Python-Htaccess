@@ -1,31 +1,38 @@
-#OpenVPN-Auth-Python-Htaccess
+# OpenVPN-Auth-Python-Htaccess
 
-This is a Python script for
+This is a simple and minimalistic Python3 script for User:Password authentication in OpenVPN. 
 
-###Features
+The Users and Passwords are appended manually to a Htaccess formed file.
+Passwords must be hashed with bcrypt(12). 
+
+Upon an incoming Connection, OpenVPN will check the provided credentials with the script and the Htaccess formed file.
+
+### Features
 
 - Read Htaccess formed File
 - Check Bcrypt hased passwords
-- Log events into a Logfile
+- Log events into stdout so they get persisted in the OpenVPN Logs
 
-###Install dependencies 
+### Install dependencies 
+
 - Python3
 - Bcrypt Library for Python3
 
-######CentOS
+###### CentOS
     sudo yum install python34 python34-pip
-######Fedora
+    sudo pip3 install bcrypt
+###### Fedora
     sudo dnf install python3 python3-pip
-######Ubuntu/Debian Based
+    sudo pip3 install bcrypt
+###### Ubuntu/Debian Based
     sudo apt-get update
     sudo apt-get install python3 python3-pip
-
-###### Python Packages
     sudo pip3 install bcrypt
 
 ### Installation
 
-Copy auth.py and user.data in the Folder /etc/openvpn/.
+1. Copy `auth.py` and `user.data` in the Folder `/etc/openvpn/`
+2. Check file permissions! It should owned by `root`, `755` for `auth.py` and `644` for `user.data`
 
 ### Configuration
 ###### Add Users and Passwords
@@ -35,9 +42,11 @@ Copy auth.py and user.data in the Folder /etc/openvpn/.
 ###### Add this to you OpenVPN Server Config:
 
     auth-user-pass-verify /etc/openvpn/auth.py via-env
-    script-security 3 system
+    script-security 3
 
 ###### Add this to you OpenVPN Client Config:
     auth-user-pass
-###### Optional: Adapt Logging Filepath, Change following line in auth.py
-    logFilePath = '/var/log/myvpn/OpenVPN-Auth.log'
+
+# License
+
+BSD 2-clause "Simplified" License
