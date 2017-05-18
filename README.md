@@ -31,8 +31,9 @@ Upon an incoming Connection, OpenVPN will check the provided credentials with th
 
 ### Installation
 
-1. Copy `auth.py` and `user.data` in the Folder `/etc/openvpn/`
-2. Check file permissions! It should owned by `root`, `755` for `auth.py` and `644` for `user.data`
+1. Download `auth.py` and `user.data` from [releases](https://github.com/FloThinksPi/OpenVPN-Auth-Python-Htaccess/releases/)
+2. Copy `auth.py` and `user.data` in the Folder `/etc/openvpn/`
+3. Check file permissions! It should owned by `root`, `755` for `auth.py` and `644` for `user.data`
 
 ### Configuration
 ###### Add Users and Passwords
