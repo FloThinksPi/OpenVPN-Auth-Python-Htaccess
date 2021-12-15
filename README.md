@@ -1,3 +1,7 @@
+
+> :warning: **Do not use this project. It is outdated and archived. Find a propper solution. Consider Wireguard.** :warning:
+
+
 # OpenVPN-Auth-Python-Htaccess
 
 This is a simple and minimalistic Python3 script for User:Password authentication in OpenVPN. 
